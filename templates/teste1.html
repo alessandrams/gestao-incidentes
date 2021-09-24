@@ -1,0 +1,206 @@
+<html>
+<!-- Dados de CSS e Javascript -->
+  <head>
+     <title>Gestão de Incidentes</title>
+     <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+  <body>
+
+    <div class="container"><br>
+        <strong><h2 style="text-align:center">Reporte de Incidente</h2></strong>
+    </div>
+
+<!-- Inicio do formulario - Parte obrigatoria -->
+
+    <div class="container"><br>
+        <h3 style="text-align:center">Identificação</h3>
+    </div>
+
+    <form  action="" method="post" role="form">
+      {{ form.csrf }}
+
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Seu nome">
+    <br>
+	  <label for="email">Email:</label>
+	  <input type="text" class="form-control" id="email" name="email" placeholder="Seu e-mail">
+	  <br>
+	  <label for="cif">CIF:</label>
+	  <input type="text" class="form-control" id="cif" name="cif" placeholder="Sua CIF">
+    <br>
+    <div class="container"><br>
+        <h4 style="text-align:center">Descrição do Incidente</h4>
+    </div>
+    <br>
+    <div id="select">
+    <label for="tipo">Tipo de incidente:</label>
+    <select class="form-control" id="incident_type" name="incident_type">
+      <option> - Selecione - </option>
+      <option value="1">Incidente interno</option>  
+      <option value="2">Site malicioso</option>  
+      <option value="3">Abuso de site</option>  
+      <option value="4">Acesso não autorizado</option>  
+      <option value="5">Distribuição indevida de informação</option> 
+      <option value="6">Phishing</option>  
+      <option value="7">Código malicioso, Malware ou Vírus</option>  
+      <option value="8">Ransomware</option> 
+      <option value="9">DDoS</option>  
+      <option value="10">Arquivo suspeito</option> 
+      <option value="11">Atividade de rede suspeita</option>   
+      <option value="12">Outros</option>  
+      </select> 
+    </div>   
+    <br>
+
+<!-- Divs "escondidas" - Aparecem de acordo com a opção ddo select -->
+    
+    <script src="{{url_for('static', filename='js/java.js')}}"></script>
+
+
+<!-- Template: incidente interno -->
+    <div id="incidente-interno" style="display: none;">
+      <label>Setor alvo:</label>
+      <input type="text" class="form-control" id="setor" name="setor" placeholder="Informe o setor afetado pelo incidente.">
+      <br>
+      <label>Colaborador alvo:</label>
+      <input type="text" class="form-control" id="colaborador-alvo" name="colaborador-alvo" placeholder="Informe o colaborador afetado pelo incidente.">
+      <br>
+      <label>Infraestrutura alvo:</label>
+      <input type="text" class="form-control" id="infra-alvo" name="infra-alvo" placeholder="Informe a infraestrutura afetada pelo incidente (máquina, sistema, usuário, ...).">
+      <br>
+      <label>Entidade responsável:</label>
+      <input type="text" class="form-control" id="entidade-responsavel" name="entidade-responsavel" placeholder="Caso conhecido, informe dados sobre a entidade responsável (setor, nome, usuário, máquina, ...).">
+      <br>
+      <label>Descrição geral:</label>
+      <textarea rows="7" class="form-control" id="descricao" name="descricao" placeholder="Descreva brevemente o incidente"></textarea>
+      <br>
+    </div>
+
+<!-- Template: site malicioso -->
+    <div id="site-malicioso" style="display: none;">
+      <label>URL:</label>
+      <input type="text" class="form-control" id="url" name="url" placeholder="Informe a URL do site">
+      <br>
+      <label>Descrição geral:</label>
+      <textarea rows="7" class="form-control" id="descricao1" name="descricao1" placeholder="Descreva brevemente o incidente"></textarea>
+      <br>
+    </div>        
+
+<!-- Template: abuso de site -->
+    <div id="abuso-site" style="display: none;">
+      <label>URL:</label>
+      <input type="text" class="form-control" id="url" name="url" placeholder="Informe a URL do site">
+      <br>
+      <label for="vulnerabilidade">Vulnerabilidade explorada:</label>
+      <select class="form-control" id="vulnerabilidade-web" name="vulnerabilidade-web">
+        <option> - Selecione - </option>
+        <option value="xss">XSS</option>  
+        <option value="injection">SQL Injection</option>  
+        <option value="rfi">RFI</option>  
+        <option value="vazamento">Vazamento de dados</option>  
+        <option value="autenticacao">Falha de autenticação</option> 
+        <option value="comunicacao">Comunicação insegura</option>  
+        <option value="outras">Outras</option>   
+      </select> 
+      <br>
+      <label>Entidade responsável:</label>
+      <input type="text" class="form-control" id="entidade-responsavel" name="entidade-responsavel" placeholder="Caso conhecido, informe dados sobre a entidade responsável (setor, nome, usuário, máquina, ...).">
+      <br>
+      <label>Descrição geral:</label>
+      <textarea rows="7" class="form-control" id="descricao" name="descricao" placeholder="Descreva brevemente o incidente"></textarea>
+      <br>
+    </div>
+
+<!-- Template: acesso não autorizado -->
+    <div id="acesso-nao-autorizado" style="display: none;">
+      <label for="artefato">Artefato acessado:</label>
+      <select class="form-control" id="artefato" name="artefato">
+        <option> - Selecione - </option>
+        <option value="servidor">Servidor</option>  
+        <option value="computador">Computador</option>  
+        <option value="sistema">Sistema</option>  
+        <option value="outro">Outro</option>   
+      </select> 
+      <br>
+      <label>Identificação do alvo:</label>
+      <input type="text" class="form-control" id="identificacao-alvo" name="identificacao-alvo" placeholder="Identifique o artefato acessado indevidamente">
+      <br>
+      <label>Entidade responsável:</label>
+      <input type="text" class="form-control" id="entidade-responsavel" name="entidade-responsavel" placeholder="Caso conhecido, informe dados sobre a entidade responsável (setor, nome, usuário, máquina, ...).">
+      <br>
+      <label>Descrição geral:</label>
+      <textarea rows="7" class="form-control" id="descricao" name="descricao" placeholder="Descreva brevemente o incidente"></textarea>
+      <br>
+    </div>    
+
+<!-- Template: distribuição indevida de informação -->
+    <div id="distribuicao-info" style="display: none;">
+      <label>Método de distribuição:</label>
+      <input type="text" class="form-control" id="metodo-distribuicao" name="metodo-distribuicao" placeholder="Descreva o canal utilizado para distribuir a informação.">
+      <br>
+      <label>Tipo de informação:</label>
+      <input type="text" class="form-control" id="tipo-info" name="identificacao-alvo" placeholder="Comente sobre categoria de dados distribuidos.">
+      <br>
+      <label>Entidade responsável:</label>
+      <input type="text" class="form-control" id="entidade-responsavel" name="entidade-responsavel" placeholder="Caso conhecido, informe dados sobre a entidade responsável (setor, nome, usuário, máquina, ...).">
+      <br>
+      <label>Descrição geral:</label>
+      <textarea rows="7" class="form-control" id="descricao" name="descricao" placeholder="Descreva brevemente o incidente"></textarea>
+      <br>
+    </div>    
+
+<!-- Template: phishing -->
+    <div id="phishing" style="display: none;">
+      <label>URL:</label>
+      <input type="text" class="form-control" id="url" name="url" placeholder="Informe a URL do site">
+      <br>
+      <label>Domínio:</label>
+      <input type="text" class="form-control" id="dominio" name="dominio" placeholder="Informe o domínio">
+      <br>
+      <label>Descrição geral:</label>
+      <textarea rows="7" class="form-control" id="descricao" name="descricao" placeholder="Descreva brevemente o incidente"></textarea>
+      <br>
+    </div>   
+    
+<!-- Template: outros -->
+    <div id="outros" style="display: none;">
+      <label>Descrição geral:</label>
+      <textarea rows="7" class="form-control" id="descricao" name="descricao" placeholder="Descreva brevemente o incidente"></textarea>
+      <br>
+    </div>    
+
+
+    <center>
+      <button type="submit" class="btn btn-success">Enviar</button>
+    </center>
+
+    </div>
+    <br>		
+    </form>
+
+    <br>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+
+          {% for message in messages %}
+            {% if "enviado" in message[1]: %}
+              <div class="alert alert-info">
+              <strong> Pronto!  </strong> {{ message[1] }}
+              </div>  
+            {% endif %}
+        
+            {% if "enviado" not in message[1]: %}
+              <div class="alert alert-danger">
+              <strong>Erro: </strong> {{ message[1] }}
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <br>
+  </body>
+</html>
